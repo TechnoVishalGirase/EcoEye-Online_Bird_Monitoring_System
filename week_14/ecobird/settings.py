@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-__pr_^vz+=or13&3_zpy%wz=yvw8f4bc02f9vgmucw-dxb@^uw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -55,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CSRF_TRUSTED_ORIGINS = ['https://ecoeye-onlinebirdmonitoringsystem-7voh.zeet-technovishalgir.zeet.app']
 
 ROOT_URLCONF = 'app.urls'
 
