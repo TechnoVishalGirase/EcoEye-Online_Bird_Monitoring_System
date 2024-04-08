@@ -43,7 +43,8 @@ def contact(request):
 # Load your trained model (ensure the path is correct)
 # model = tf.keras.models.load_model('C:/Ecobird_week_12/venv/model.h5')
 # Load your trained model (ensure the path is correct)
-model_path = 'C:/Ecobird_week_12/venv/model.h5'
+# model_path = 'C:/Ecobird_week_12/venv/model.h5'
+model_path = 'EcoEye-Online_Bird_Monitoring_System/Week_13/model/model.h5'
 try:
     model = tf.keras.models.load_model(model_path)
     logger.info(f"Model loaded successfully from {model_path}")
