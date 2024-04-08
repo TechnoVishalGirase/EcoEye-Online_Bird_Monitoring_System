@@ -54,4 +54,3 @@ Werkzeug==3.0.1
 wheel==0.43.0
 wrapt~=1.12.1
 zipp==3.18.1
-tensorflow-gpu==2.4.0
