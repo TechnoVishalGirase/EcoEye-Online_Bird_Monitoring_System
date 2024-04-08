@@ -46,12 +46,45 @@ def contact(request):
 # model = tf.keras.models.load_model('C:/Ecobird_week_12/venv/model.h5')
 # Load your trained model (ensure the path is correct)
 # model_path = 'C:/EcoBirdEye_week_14/model.h5'
-model_path = "https://raw.githubusercontent.com/TechnoVishalGirase/EcoEye-Online_Bird_Monitoring_System/main/week_14/model.h5"
-try:
-    model = tf.keras.models.load_model(model_path)
-    logger.info(f"Model loaded successfully from {model_path}")
-except Exception as e:
-    logger.error(f"Failed to load model from {model_path}: {e}")
+#model_path = "https://raw.githubusercontent.com/TechnoVishalGirase/EcoEye-Online_Bird_Monitoring_System/main/week_14/model.h5"
+#####--------------Testing--------------###########
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+model_local_path = os.path.join(BASE_DIR, 'model.h5')
+model_url = "https://raw.githubusercontent.com/TechnoVishalGirase/EcoEye-Online_Bird_Monitoring_System/main/week_14/model.h5"
+
+def download_model(model_url, model_local_path):
+    try:
+        response = requests.get(model_url)
+        response.raise_for_status()  # Check if the download was successful
+        with open(model_local_path, 'wb') as f:
+            f.write(response.content)
+        logger.info(f"Model downloaded successfully from {model_url}")
+    except Exception as e:
+        logger.error(f"Failed to download model from {model_url}: {e}")
+        raise
+
+# Function to load the model
+def load_model_from_path(model_local_path):
+    try:
+        model = tf.keras.models.load_model(model_local_path)
+        logger.info(f"Model loaded successfully from {model_local_path}")
+        return model
+    except Exception as e:
+        logger.error(f"Failed to load model from {model_local_path}: {e}")
+        raise
+
+download_model(model_url, model_local_path)
+model = load_model_from_path(model_local_path)
+
+##-------------------------------------------------##################
+
+
+# try:
+#     model = tf.keras.models.load_model(model_path)
+#     logger.info(f"Model loaded successfully from {model_path}")
+# except Exception as e:
+#     logger.error(f"Failed to load model from {model_path}: {e}")
 
 def preprocess_image(image_path):
     img = tf.keras.preprocessing.image.load_img(image_path, target_size=(224, 224))
