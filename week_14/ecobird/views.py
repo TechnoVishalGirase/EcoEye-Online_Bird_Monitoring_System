@@ -172,7 +172,48 @@ def get_class_label(class_index):
 # Set the custom temporary directory
 # CUSTOM_TEMP_DIR = 'C:/Ecobird_week_12/venv/ecobirdeye/ecobird/templates/frontend/static/img'
 # CUSTOM_TEMP_DIR = 'C:/Ecobird_week_12/venv/templates/frontend/static/img/'
-CUSTOM_TEMP_DIR = 'C:/EcoBirdEye_week_14/app/templates/app/static/img/'
+
+##---------------------Working----------------------------------------------------------
+
+# CUSTOM_TEMP_DIR = 'C:/EcoBirdEye_week_14/app/templates/app/static/img/'
+
+# def predict(request):
+#     if request.method == 'POST':
+#         file = request.FILES.get('image', None)
+#         if file is None:
+#             return HttpResponse('No selected file', status=400)
+
+#         # try:
+#             # Save the file temporarily in the custom directory
+#         with tempfile.NamedTemporaryFile(dir=CUSTOM_TEMP_DIR, delete=False, suffix=".jpg") as tmp_file:
+#             for chunk in file.chunks():
+#                 tmp_file.write(chunk)
+#             tmp_file.flush()
+#             os.fsync(tmp_file.fileno())
+
+#             processed_image = preprocess_image(tmp_file.name)
+
+#         # Get the prediction
+#         predicted_class_index = predict_image(model, processed_image)
+#         class_label = get_class_label(predicted_class_index.item())
+
+#         # Generate a URL to access the temporary image
+#         image_url = f'CUSTOM_TEMP_DIR{os.path.basename(tmp_file.name)}'  # Adjust as per your media URL configuration
+
+#         # Return both the predicted label and the image URL
+#         # return HttpResponse(f'Predicted Label: {class_label}\nImage URL: {image_url}')
+#         return render(request, "app/result.html", {'label': class_label, 'image_url': image_url})
+#         # except Exception as e:
+#         #     return HttpResponse('Error processing the prediction', status=500)
+
+#     return HttpResponse('Invalid request', status=400)
+######----------------------------------------------------------------------------------------------------------------
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 def predict(request):
     if request.method == 'POST':
@@ -180,30 +221,28 @@ def predict(request):
         if file is None:
             return HttpResponse('No selected file', status=400)
 
-        # try:
-            # Save the file temporarily in the custom directory
-        with tempfile.NamedTemporaryFile(dir=CUSTOM_TEMP_DIR, delete=False, suffix=".jpg") as tmp_file:
-            for chunk in file.chunks():
-                tmp_file.write(chunk)
-            tmp_file.flush()
-            os.fsync(tmp_file.fileno())
+        # Save the file temporarily
+        file_name = default_storage.save("temp_images/" + file.name, ContentFile(file.read()))
+        file_path = default_storage.path(file_name)
 
-            processed_image = preprocess_image(tmp_file.name)
-
-        # Get the prediction
+        # Process the image and predict
+        processed_image = preprocess_image(file_path)
         predicted_class_index = predict_image(model, processed_image)
         class_label = get_class_label(predicted_class_index.item())
 
         # Generate a URL to access the temporary image
-        image_url = f'CUSTOM_TEMP_DIR{os.path.basename(tmp_file.name)}'  # Adjust as per your media URL configuration
+        # Assuming you have MEDIA_URL set in your settings and the media files are served correctly
+        image_url = settings.MEDIA_URL + file_name
 
-        # Return both the predicted label and the image URL
-        # return HttpResponse(f'Predicted Label: {class_label}\nImage URL: {image_url}')
+        # Clean up the temporary file if needed
+        default_storage.delete(file_name)
+
+        # Return the predicted label and the image URL
         return render(request, "app/result.html", {'label': class_label, 'image_url': image_url})
-        # except Exception as e:
-        #     return HttpResponse('Error processing the prediction', status=500)
 
     return HttpResponse('Invalid request', status=400)
+
+
 
 # import tempfile
 # import os
