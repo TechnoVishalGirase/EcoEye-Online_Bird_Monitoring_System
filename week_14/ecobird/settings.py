@@ -56,7 +56,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CSRF_TRUSTED_ORIGINS = ['https://ecoeye-onlinebirdmonitoringsystem-7voh.zeet-technovishalgir.zeet.app']
+CSRF_TRUSTED_ORIGINS = [
+    'https://ecoeye-onlinebirdmonitoringsystem-7voh.zeet-technovishalgir.zeet.app',
+]
 
 ROOT_URLCONF = 'app.urls'
 
