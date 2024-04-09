@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://ecoeye-onlinebirdmonitoringsystem-7voh.zeet-technovishalgir.zeet.app']
+# CSRF_TRUSTED_ORIGINS = ['https://ecoeye-onlinebirdmonitoringsystem-7voh.zeet-technovishalgir.zeet.app']
 
 ROOT_URLCONF = 'app.urls'
 
@@ -127,20 +127,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# STATIC_URL = 'static/'
+STATIC_URL = 'static/'
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # Additional locations of static files
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'app', 'templates', 'app', 'static'),]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'app', 'templates', 'app', 'static'),]
 
-STATICFILES_DIRS = []
+# STATICFILES_DIRS = []
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'app', 'templates', 'app', 'static')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
