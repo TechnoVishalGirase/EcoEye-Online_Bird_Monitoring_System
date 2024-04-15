@@ -6,7 +6,6 @@ urlpatterns = [
     path('error/',views.error_, name = 'error'),
     path('about/',views.about, name = "about"),
     path('booking/',views.booking, name = "booking"),
-    path('bird_tracking/', views.bird_tracking, name="bird_tracking"),
     path('destination/',views.destination, name = "destination"),
     path('service/',views.service, name = "service"),
     path('package/',views.package, name = "package"),
