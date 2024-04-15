@@ -8,12 +8,7 @@ import io
 import os
 import tempfile
 import requests
-# from app.model import download_model, load_model_from_path
-# from django.conf import settings
-
-# model_local_path = os.path.join(settings.BASE_DIR, 'model.h5')
-# model_url = "C:/EcoBirdEye_week_14/model.h5"
-
+									  
 def index(request):
     return render(request,"app/index.html")
 
@@ -28,8 +23,8 @@ def booking(request):
     return render(request,"app/booking.html")
 
 def bird_tracking(request):
-    return render(request,"app/bird_tracking.html")
-
+    return render(request,"app/bird_tracking.html")						   
+												   
 def destination(request):
     return render(request,"app/destination.html")
 
@@ -52,43 +47,58 @@ def contact(request):
 # Load your trained model (ensure the path is correct)
 # model = tf.keras.models.load_model('C:/Ecobird_week_12/venv/model.h5')
 # Load your trained model (ensure the path is correct)
+# model_path = 'C:/EcoBirdEye_week_14/model.h5'
+#model_path = "https://raw.githubusercontent.com/TechnoVishalGirase/EcoEye-Online_Bird_Monitoring_System/main/week_14/model.h5"
+#####--------------Testing--------------###########
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+model_local_path = os.path.join(BASE_DIR, 'model.h5')
+model_url = "https://raw.githubusercontent.com/TechnoVishalGirase/EcoEye-Online_Bird_Monitoring_System/main/week_14/model.h5"
 
-# Path where you want to save the downloaded model
-# from pathlib import Path
-# BASE_DIR = Path(__file__).resolve().parent.parent
-# model_local_path = os.path.join(BASE_DIR, 'model.h5')
-# model_url = "C:/EcoBirdEye_week_14/model.h5"
+def download_model(model_url, model_local_path):
+    try:
+        response = requests.get(model_url)
+        response.raise_for_status()  # Check if the download was successful
+        with open(model_local_path, 'wb') as f:
+            f.write(response.content)
+        logger.info(f"Model downloaded successfully from {model_url}")
+    except Exception as e:
+        logger.error(f"Failed to download model from {model_url}: {e}")
+        raise
 
-# def download_model(model_url, model_local_path):
-#     try:
-#         response = requests.get(model_url)
-#         response.raise_for_status()  # Check if the download was successful
-#         with open(model_local_path, 'wb') as f:
-#             f.write(response.content)
-#         logger.info(f"Model downloaded successfully from {model_url}")
-#     except Exception as e:
-#         logger.error(f"Failed to download model from {model_url}: {e}")
-#         raise
+# Function to load the model
+def load_model_from_path(model_local_path):
+    try:
+											
+																			 
+        model = tf.keras.models.load_model(model_local_path)
+									   
+        logger.info(f"Model loaded successfully from {model_local_path}")
+        return model
+    except Exception as e:
+        logger.error(f"Failed to load model from {model_local_path}: {e}")
+        raise
 
-# # Function to load the model
-# def load_model_from_path(model_local_path):
-#     try:
-#         model = tf.keras.models.load_model(model_local_path)
-#         logger.info(f"Model loaded successfully from {model_local_path}")
-#         return model
-#     except Exception as e:
-#         logger.error(f"Failed to load model from {model_local_path}: {e}")
-#         raise
+							  
+download_model(model_url, model_local_path)
+		  
+model = load_model_from_path(model_local_path)
+																		   
+					  
+							
+																			
+			   
 
-# download_model(model_url, model_local_path)
-# model = load_model_from_path(model_local_path)
-model_path = 'C:/EcoBirdEye_week_14/model.h5'
+##-------------------------------------------------##################
+												
+											 
 
-try:
-    model = tf.keras.models.load_model(model_path)
-    logger.info(f"Model loaded successfully from {model_path}")
-except Exception as e:
-    logger.error(f"Failed to load model from {model_path}: {e}")
+
+# try:
+#     model = tf.keras.models.load_model(model_path)
+#     logger.info(f"Model loaded successfully from {model_path}")
+# except Exception as e:
+#     logger.error(f"Failed to load model from {model_path}: {e}")
 
 def preprocess_image(image_path):
     img = tf.keras.preprocessing.image.load_img(image_path, target_size=(224, 224))
@@ -177,7 +187,8 @@ def get_class_label(class_index):
 # CUSTOM_TEMP_DIR = 'C:/Ecobird_week_12/venv/ecobirdeye/ecobird/templates/frontend/static/img'
 # CUSTOM_TEMP_DIR = 'C:/Ecobird_week_12/venv/templates/frontend/static/img/'
 
-#-----------------------Working----------------------#########
+##---------------------Working----------------------------------------------------------
+
 # CUSTOM_TEMP_DIR = 'C:/EcoBirdEye_week_14/app/templates/app/static/img/'
 
 # def predict(request):
@@ -210,8 +221,9 @@ def get_class_label(class_index):
 #         #     return HttpResponse('Error processing the prediction', status=500)
 
 #     return HttpResponse('Invalid request', status=400)
+######----------------------------------------------------------------------------------------------------------------
 
-#--------------------------------------------------------------------------------------------------------------------------
+																														   
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -244,6 +256,9 @@ def predict(request):
         return render(request, "app/result.html", {'label': class_label, 'image_url': image_url})
 
     return HttpResponse('Invalid request', status=400)
+
+
+
 # import tempfile
 # import os
 
