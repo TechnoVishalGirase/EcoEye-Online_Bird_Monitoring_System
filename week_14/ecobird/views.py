@@ -21,9 +21,6 @@ def about(request):
 
 def booking(request):
     return render(request,"app/booking.html")
-
-def bird_tracking(request):
-    return render(request,"app/bird_tracking.html")						   
 												   
 def destination(request):
     return render(request,"app/destination.html")
