@@ -1,0 +1,210 @@
+<!-- {% load static %} -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="utf-8">
+    <title>Bird - Tracking Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Full height */
+            width: 100%; /* Full width */
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        #tableau-container {
+            height: 100%;
+            width: 100%;
+            position: absolute; /* Use absolute positioning */
+            top: 0;
+            left: 0;
+        }
+
+        tableau-viz {
+            height: 100% !important; /* Override any other styles */
+            width: 100% !important; /* Use important to ensure override */
+        }
+    </style>
+
+    
+
+</head>
+
+
+<body>
+  
+
+    <div id="tableau-container">
+        <tableau-viz id="tableau-viz"
+                     src="https://prod-ca-a.online.tableau.com/t/harpreetsingh53c1d55f209f/views/BirdReport/Dashboard1/236f144c-a8fc-4e68-aefe-b7ae6e4fdc41/7c9aadf8-3c3f-4dff-a317-122a20d7df8c"
+                     hide-tabs
+                     toolbar='bottom'>
+        </tableau-viz>
+    </div>
+
+    <script type='module' src='https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script>
+</body>
+
+</html>
+-->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--Dashboard style-->
+    <meta charset="utf-8">
+    <title>Bird - Tracking Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Full height */
+            width: 100%; /* Full width */
+            overflow: hidden; /* Hide scrollbars */
+        }
+
+        .container-fluid position-relative p-0 {
+            background-color: #000; /* Black color for the top bar */
+            height: 50px; /* Adjust the height as needed */
+            width: 100%; /* Full width */
+        }
+
+        #tableau-container {
+            position: absolute; /* Use absolute positioning */
+            top: 100px; /* Start right below the black line */
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        tableau-viz {
+            height: calc(100% - 100px) !important; /* Full height minus the top bar */
+            width: 100% !important; /* Full width */
+        }
+    </style>
+    <!--Ends here -->
+    
+    <meta charset="utf-8">
+    <title>ECO-EYE</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-dark px-5 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                <!-- <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <small class="me-3 text-light"><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</small>
+                    <small class="me-3 text-light"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</small>
+                    <small class="text-light"><i class="fa fa-envelope-open me-2"></i>info@example.com</small>
+                </div> -->
+            </div>
+            <!-- <div class="col-lg-4 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-twitter fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
+                    <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <h1 class="text-primary m-0"><i class="fa fa-eye me-3"></i>ECO EYE</h1>
+                <!-- <img src="{% static 'img/logo.png' %}" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{% url 'index' %}" class="nav-item nav-link">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    <a href="{% url 'service' %}" class="nav-item nav-link">Services</a>
+                    <a href="{% url 'package' %}" class="nav-item nav-link">Prices</a>
+                    <a href="{% url 'team' %}" class="nav-item nav-link">Team</a>
+                    <!-- <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a> -->
+                </div>
+                <a href="{% url 'contact' %}" class="btn btn-primary rounded-pill py-2 px-4">Try Now</a>
+            </div>
+        </nav>
+
+        <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+            <!-- <div class="container py-5">
+                <div class="row justify-content-center py-5">
+                    <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                        <h1 class="display-3 text-white mb-3 animated slideInDown">The Future of Bird Monitoring</h1>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+
+    <div id="tableau-container">
+        <tableau-viz id="tableau-viz"
+                     src="https://prod-ca-a.online.tableau.com/t/harpreetsingh53c1d55f209f/views/BirdReport/Dashboard1/236f144c-a8fc-4e68-aefe-b7ae6e4fdc41/7c9aadf8-3c3f-4dff-a317-122a20d7df8c"
+                     toolbar='bottom'
+                     hide-tabs>
+        </tableau-viz>
+    </div>
+
+    <script type='module' src='https://prod-ca-a.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>   
+</body>
+
+</html>
