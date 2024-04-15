@@ -9,7 +9,6 @@ import os
 import tempfile
 import requests
 
-
 def index(request):
     return render(request,"app/index.html")
 
@@ -23,6 +22,9 @@ def about(request):
 def booking(request):
     return render(request,"app/booking.html")
 
+def bird_tracking(request):
+    return render(request,"app/bird_tracking.html")						   
+												   
 def destination(request):
     return render(request,"app/destination.html")
 
@@ -67,17 +69,29 @@ def download_model(model_url, model_local_path):
 # Function to load the model
 def load_model_from_path(model_local_path):
     try:
+											
+																			 
         model = tf.keras.models.load_model(model_local_path)
+									   
         logger.info(f"Model loaded successfully from {model_local_path}")
         return model
     except Exception as e:
         logger.error(f"Failed to load model from {model_local_path}: {e}")
         raise
 
+							  
 download_model(model_url, model_local_path)
+		  
 model = load_model_from_path(model_local_path)
+																		   
+					  
+							
+																			
+			   
 
 ##-------------------------------------------------##################
+												
+											 
 
 
 # try:
@@ -209,6 +223,7 @@ def get_class_label(class_index):
 #     return HttpResponse('Invalid request', status=400)
 ######----------------------------------------------------------------------------------------------------------------
 
+																														   
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render
